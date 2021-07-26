@@ -14,17 +14,13 @@ app.use(session({secret: 'edurekaSecert', saveUninitialized:true, resave:true}))
 // configuring cors middleware  packages
 app.use(cors());
 let sess;
-let a={
-  name:'max'
-}
+
 app.get('/',(req,res) => {
     sess=req.session;
     sess.email=" "
     console.log(">>>>",sess.email);
     // res.render('index',{error: req.query.valid?req.query.valid:'',
     //                     msg: req.query.msg?req.query.msg:''})
-    res.send(a);
-    console.log(a);
 })
 
 
