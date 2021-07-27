@@ -46,7 +46,7 @@ router.post('/addProduct', function(req, res) {
       discountedPrice: req.body.discountedPrice,
       productImage: req.body.productImage,
       productDescription : req.body.productDescription,
-      isTopProduct: req.body.isTopProduct,
+      isTopProduct: req.body.topSellingProduct,
       createdOn: currentDate
 
 
