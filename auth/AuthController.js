@@ -103,22 +103,22 @@ router.post('/login', function(req, res) {
 });
 
 //add-product
-router.post('/addProduct', function(req, res) {
+// router.post('/addProduct', function(req, res) {
   
 
 
-  Products.create({
-    id: req.body.id,
-    name: req.body.name,
-    price: req.body.price
-  },
-    function(err, products) {
-      if (err) return res.status(500).send("There was a problem registering the user.")
-      // create a token
-      const string = encodeURIComponent('Product added successfully');
-      res.redirect('/users/productsList/?msg=' + string);
-    });
-});
+//   Products.create({
+//     id: req.body.id,
+//     name: req.body.name,
+//     price: req.body.price
+//   },
+//     function(err, products) {
+//       if (err) return res.status(500).send("There was a problem registering the user.")
+//       // create a token
+//       const string = encodeURIComponent('Product added successfully');
+//       res.redirect('/users/productsList/?msg=' + string);
+//     });
+// });
 
 
 // Info of logined User

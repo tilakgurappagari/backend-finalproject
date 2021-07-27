@@ -9,7 +9,6 @@ localStorage = new LocalStorage('./scratch');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 const User = require('./User');
-const Products = require('./Products.js');
 
 
 
