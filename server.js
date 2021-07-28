@@ -4,15 +4,14 @@ const port = process.env.PORT || 8081;
 const bodyParser =  require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
+app.use(cors());
 
-app.use(express.static(__dirname+'/public'));
 
 app.use(session({secret: 'edurekaSecert', saveUninitialized:true, resave:true}));
 
 // app.set('view engine', 'ejs');
 // app.set('views', './views');
 // configuring cors middleware  packages
-app.use(cors());
 let sess;
 
 app.get('/',(req,res) => {

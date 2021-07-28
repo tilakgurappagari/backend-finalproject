@@ -77,48 +77,57 @@ router.post('/register', function(req, res) {
 });
 
 // Login User
-router.post('/login', function(req, res) {
+// router.post('/login', function(req, res) {
+//   console.log("login route has been hit");
+//   User.findOne({
+//     email: req.body.email
+//   }, function(err, user) {
+//     if (err) return res.status(500).send('Error on the server.');
+//     const string = encodeURIComponent('! Please enter valid value');
+//     if (!user) {
+//       res.redirect('/?valid=' + string);
+//     } else {
+//       const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+//       if (!passwordIsValid) return res.status(401).send({
+//           auth: false,
+//           token: null
+//         });
+//       var token = jwt.sign({
+//         id: user._id
+//       }, config.secret, {
+//         expiresIn: 86400 // expires in 24 hours
+//       });
+//       localStorage.setItem('authtoken', token)
+//       res.redirect(`/users/profile`);
+//     }
+//   });
+// });
+router.post('/login', (req, res) => {
   User.findOne({
     email: req.body.email
   }, function(err, user) {
-    if (err) return res.status(500).send('Error on the server.');
-    const string = encodeURIComponent('! Please enter valid value');
-    if (!user) {
-      res.redirect('/?valid=' + string);
-    } else {
+    if (err) return res.send({message:'Error Occured',status:500});
       const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
       if (!passwordIsValid) return res.status(401).send({
           auth: false,
           token: null
         });
-      var token = jwt.sign({
+      const token = jwt.sign({
         id: user._id
       }, config.secret, {
         expiresIn: 86400 // expires in 24 hours
       });
-      localStorage.setItem('authtoken', token)
-      res.redirect(`/users/profile`);
-    }
-  });
+      res.status(200).send({
+        auth: true,
+        message:"Login Successfull",
+        token: token,
+        user:user
+       
+      });
+    });
 });
 
-//add-product
-// router.post('/addProduct', function(req, res) {
-  
 
-
-//   Products.create({
-//     id: req.body.id,
-//     name: req.body.name,
-//     price: req.body.price
-//   },
-//     function(err, products) {
-//       if (err) return res.status(500).send("There was a problem registering the user.")
-//       // create a token
-//       const string = encodeURIComponent('Product added successfully');
-//       res.redirect('/users/productsList/?msg=' + string);
-//     });
-// });
 
 
 // Info of logined User

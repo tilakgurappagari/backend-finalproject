@@ -38,19 +38,18 @@ router.post('/addProduct', function(req, res) {
     const currentDate = new Date();
     console.log(req.body);
 
-    Products.create({
-      productId: req.body.productId,
-      productName: req.body.productName,
-      category: req.body.category,
-      price: req.body.price,
-      discountedPrice: req.body.discountedPrice,
-      productImage: req.body.productImage,
-      productDescription : req.body.productDescription,
-      isTopProduct: req.body.topSellingProduct,
-      createdOn: currentDate
+ // productId: req.body.productId,
+      // productName: req.body.productName,
+      // category: req.body.category,
+      // price: req.body.price,
+      // discountedPrice: req.body.discountedPrice,
+      // productImage: req.body.productImage,
+      // productDescription : req.body.productDescription,
+      // isTopProduct: req.body.topSellingProduct,
+      // createdOn: currentDate
+      
 
-
-    },
+    Products.create({...req.body},
       function(err, products) {
         if (err) return res.status(500).send("There was a problem in adding the product.")
         // create a token
