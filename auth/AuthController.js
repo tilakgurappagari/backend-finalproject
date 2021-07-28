@@ -12,8 +12,7 @@ const bcrypt = require('bcryptjs');
 // For Secert Token
 const config = require('../config');
 // For User Schema
-const User = require('../user/User');
-// const Products = require('../user/Products')
+const User = require('./Users');
 const session = require('express-session');
 const cors = require('cors');
 app.use(cors());
@@ -23,9 +22,6 @@ router.use(session({
   resave: false,
   saveUninitialized: true
 }));
-app.use(express.static(__dirname + '/public'));
-// app.set('view engine', 'ejs');
-// app.set('views', './views');
 
 router.use(bodyParser.urlencoded({
   extended: false
@@ -72,41 +68,17 @@ router.post('/register', function(req, res) {
         message: "user created successfully"
       }
       res.send(responseData);
-      //res.redirect('/?msg=' + string);
     });
 });
 
-// Login User
-// router.post('/login', function(req, res) {
-//   console.log("login route has been hit");
-//   User.findOne({
-//     email: req.body.email
-//   }, function(err, user) {
-//     if (err) return res.status(500).send('Error on the server.');
-//     const string = encodeURIComponent('! Please enter valid value');
-//     if (!user) {
-//       res.redirect('/?valid=' + string);
-//     } else {
-//       const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-//       if (!passwordIsValid) return res.status(401).send({
-//           auth: false,
-//           token: null
-//         });
-//       var token = jwt.sign({
-//         id: user._id
-//       }, config.secret, {
-//         expiresIn: 86400 // expires in 24 hours
-//       });
-//       localStorage.setItem('authtoken', token)
-//       res.redirect(`/users/profile`);
-//     }
-//   });
-// });
 router.post('/login', (req, res) => {
   User.findOne({
     email: req.body.email
   }, function(err, user) {
-    if (err) return res.send({message:'Error Occured',status:500});
+    if (err) {
+     
+      return res.send({message:'Error Occured',status:500});
+    }
       const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
       if (!passwordIsValid) return res.status(401).send({
           auth: false,

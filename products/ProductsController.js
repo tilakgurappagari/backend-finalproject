@@ -38,26 +38,33 @@ router.post('/addProduct', function(req, res) {
     const currentDate = new Date();
     console.log(req.body);
 
- // productId: req.body.productId,
-      // productName: req.body.productName,
-      // category: req.body.category,
-      // price: req.body.price,
-      // discountedPrice: req.body.discountedPrice,
-      // productImage: req.body.productImage,
-      // productDescription : req.body.productDescription,
-      // isTopProduct: req.body.topSellingProduct,
-      // createdOn: currentDate
-      
+    Products.create({
+      productId: req.body.productId,
+      productName: req.body.productName,
+      category: req.body.category,
+      price: req.body.price,
+      discountedPrice: req.body.discountedPrice,
+      productImage: req.body.productImage,
+      productDescription : req.body.productDescription,
+      isTopProduct: req.body.topSellingProduct,
+      createdOn: currentDate
 
-    Products.create({...req.body},
+
+    },
       function(err, products) {
-        if (err) return res.status(500).send("There was a problem in adding the product.")
+        if (err) {
+          let responseData = {
+            status: "failure",
+            message: "Cannot add the product"
+        }
+          
+          return res.status(500).send(responseData)
+        }
         // create a token
-        const responseData = {
+        let responseData = {
             status: "success",
             message: "Product added successfully"
         }
-        // res.redirect('/users/productsList/?msg=' + string);
             res.send(responseData);
       });
   });
@@ -66,8 +73,13 @@ router.post('/addProduct', function(req, res) {
 router.get('/productsList', function (req, res) {
     Products.find({}, function (err, products) {
         if (err){
-             return res.status(500).send("There was a problem finding the products.");
-            }
+          let responseData = {
+            status: "failure",
+            message: "Cannot get the products"
+        }
+          
+          return res.status(500).send(responseData) 
+                 }
        console.log(products);
         res.send(products);
 
