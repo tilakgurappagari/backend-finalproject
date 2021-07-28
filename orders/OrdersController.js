@@ -33,7 +33,7 @@ router.post('/addOrder', function(req, res) {
   
     const currentDate = new Date();
     req.body.orderedOn = currentDate;
-    console.log(req.body);
+    // console.log(req.body);
 
     Orders.create({...req.body},
       function(err, orders) {
@@ -57,7 +57,7 @@ router.get('/ordersList', function (req, res) {
             }
              return res.status(500).send(responseData);
             }
-       console.log(orders);
+    //    console.log(orders);
         res.send(orders);
 
     });

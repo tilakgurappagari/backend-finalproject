@@ -31,10 +31,10 @@ router.use(bodyParser.json());
 // Register User
 router.post('/register', function(req, res) {
   let givenRole = null;
-  console.log("hello");
+  // console.log("hello");
 
 
-  console.log(req.body);
+  // console.log(req.body);
   if(req.body.role===undefined)
     {
         givenRole = "user"
@@ -42,7 +42,7 @@ router.post('/register', function(req, res) {
     else{
       givenRole = req.body.role
     }
-    console.log(givenRole);
+    // console.log(givenRole);
 
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
