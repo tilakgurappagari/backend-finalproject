@@ -24,7 +24,6 @@ router.use(session({
   resave: false,
   saveUninitialized: true
 }));
-app.use(express.static(__dirname + '/public'));
 
 
 router.use(bodyParser.urlencoded({
@@ -34,9 +33,10 @@ router.use(bodyParser.json());
 
 //add-product
 router.post('/addProduct', function(req, res) {
+
   
     const currentDate = new Date();
-    // console.log(req.body);
+     console.log(req.body);
     req.body.createdOn = currentDate;
     Products.create({...req.body},
       function(err, products) {

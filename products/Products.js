@@ -7,7 +7,7 @@ const productsSchema = new mongoose.Schema({
   discountedPrice: String,
   productImage: String,
   productDescription: String,
-  isTopProduct: Boolean,
+  topSellingProduct: Boolean,
   createdOn: Date
 
   
