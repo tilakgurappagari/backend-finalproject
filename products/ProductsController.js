@@ -74,6 +74,17 @@ router.get('/productsList', function (req, res) {
     });
 });
 
+router.post('/deleteProduct',function(req,res){
+  Products.deleteOne({_id:req.body.productId},(err, result)=>{
+    if (err) { 
+      res.send({status:"failure", message:"product deletion failed"});
+    }else{
+
+        res.send({status:"successfull", message:"product deleted sussessfully"});
+    }
+})       
+})
+
 
 
 
